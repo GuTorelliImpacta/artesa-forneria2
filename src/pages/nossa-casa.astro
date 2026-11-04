@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Fio from '../components/Fio.astro';
+import Acoes from '../components/Acoes.astro';
+import Faq from '../components/Faq.astro';
+import { faqPage } from '../lib/jsonld';
+import letreiro from '../assets/letreiro.jpg';
+import adega from '../assets/salao-adega.jpg';
+---
+<Base
+  titulo="Nossa casa | Artesã Forneria, Tremembé"
+  descricao="Conheça a casa de tijolo da Artesã Forneria, na Vila Irmãos Arnoni: salão aconchegante, adega e pizza de fermentação longa."
+  caminho="/nossa-casa/"
+  jsonld={[faqPage()].filter(Boolean) as object[]}
+>
+  <section class="secao-escura cab-pagina">
+    <div class="container grade-2">
+      <div>
+        <p class="sobrancelha">Nossa casa</p>
+        <h1>Casa pequena, forno quente, porta aberta.</h1>
+        <div class="mt-s"><Fio /></div>
+        <p class="lead mt-m">A Artesã Forneria fica na Rua Padre Charton, na Vila Irmãos Arnoni, perto do Horto Florestal. É uma casa de bairro: tijolo aparente, luz baixa e pizza feita à mão.</p>
+      </div>
+      <div class="medalhao peq">
+        <Foto src={letreiro} alt="Letreiro cursivo dourado e iluminado, “Artesã Forneria”, sobre a fachada preta." sizes="(max-width: 900px) 70vw, 340px" widths={[310]} prioridade />
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-escura-2">
+    <div class="container grade-2">
+      <div class="prosa">
+        <p class="sobrancelha">O ambiente</p>
+        <h2 class="h2">Um corredor de tijolo, vinho e lâmpadas de filamento.</h2>
+        <p>Por dentro, o salão é estreito e acolhedor: tijolo aparente, uma parede verde-menta e lâmpadas de filamento acesas sobre as mesas.</p>
+        <p>No fundo do salão, um armário de madeira guarda a adega de vinhos. Na entrada, um relógio de pêndulo marca o hall e lembra o que a casa faz: pizza com tempo.</p>
+        <p class="aviso-bebida">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
+      </div>
+      <figure class="foto-reta peq">
+        <Foto src={adega} alt="Armário de madeira com adega de vinhos e taças, na parede verde do salão." sizes="(max-width: 900px) 70vw, 320px" widths={[221]} />
+      </figure>
+    </div>
+  </section>
+
+  <section class="secao secao-creme">
+    <div class="container">
+      <div class="prosa">
+        <p class="sobrancelha">A pizza</p>
+        <h2 class="h2">Fermentação longa, feita à mão.</h2>
+        <p>A massa descansa por bastante tempo antes de ir ao forno. É esse descanso que deixa a borda alta, leve por dentro e dourada, com pontinhos queimados por fora.</p>
+        <p>Cada disco é aberto à mão. O cardápio completo está na página de <a href="/cardapio/">cardápio</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-escura">
+    <div class="container">
+      <div class="estreito">
+        <p class="sobrancelha">Perguntas</p>
+        <h2 class="h2">Sobre a casa e a massa.</h2>
+        <div class="mt-m"><Faq /></div>
+        <div class="mt-l"><Acoes cardapio origem="nossa-casa" /></div>
+      </div>
+    </div>
+  </section>
+</Base>

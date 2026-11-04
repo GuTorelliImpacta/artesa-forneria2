@@ -1,0 +1,24 @@
+---
+import { config, abs } from '../lib/site';
+interface Props { titulo: string; descricao: string; caminho: string; imagem?: string; noindex?: boolean }
+const { titulo, descricao, caminho, imagem = '/og.jpg', noindex = false } = Astro.props;
+const canonical = abs(caminho);
+---
+<title>{titulo}</title>
+<meta name="description" content={descricao} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex" />}
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:site_name" content={config.nome} />
+<meta property="og:title" content={titulo} />
+<meta property="og:description" content={descricao} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={abs(imagem)} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Artesã Forneria: pizza de fermentação longa feita à mão no Tremembé" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={titulo} />
+<meta name="twitter:description" content={descricao} />
+<meta name="twitter:image" content={abs(imagem)} />

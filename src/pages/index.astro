@@ -1,0 +1,175 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Fio from '../components/Fio.astro';
+import Acoes from '../components/Acoes.astro';
+import Relogio from '../components/Relogio.astro';
+import Composer from '../components/Composer.astro';
+import Faq from '../components/Faq.astro';
+import Horarios from '../components/Horarios.astro';
+import MapaEmbed from '../components/MapaEmbed.astro';
+import { config, H, cardapio, temCardapio, enderecoLinha1, enderecoLinha2, deliveryUrl } from '../lib/site';
+import { fmtHora } from '../lib/horarios';
+import { restaurante, faqPage } from '../lib/jsonld';
+import fachada from '../assets/fachada-porta.jpg';
+import pizzaBranca from '../assets/pizza-branca-caixa.jpg';
+import pizza from '../assets/pizza-presunto-rucula.jpg';
+import { getImage } from 'astro:assets';
+import salao from '../assets/salao-fundo.jpg';
+
+const heroSet = await Promise.all([320, 440, 640].map((w) => getImage({ src: fachada, width: w, format: 'avif' })));
+const heroSrcset = heroSet.map((i) => `${i.src} ${i.options.width}w`).join(', ');
+const h1 = config.confirmado.fermentacao72h
+  ? 'Pizza de 72 horas, feita à mão no Tremembé.'
+  : config.slogan;
+const qui = H.semana.find((d) => d.dia === 4)!;
+const dom = H.semana.find((d) => d.dia === 0)!;
+const sub = `Quinta a sábado, a partir das ${fmtHora(qui.abre!)}. Domingo, das ${fmtHora(dom.abre!)} às ${fmtHora(dom.fecha!)}. ${config.endereco.referencia[0].toUpperCase()}${config.endereco.referencia.slice(1)}.`;
+
+const destaques = cardapio.categorias.flatMap((c: any) => c.itens.filter((i: any) => i.destaque).map((i: any) => ({ ...i, categoria: c.nome }))).slice(0, 4);
+
+const passos = [
+  { t: 'A massa descansa', p: 'O tempo faz o trabalho. A massa descansa e ganha sabor antes de ir para o forno.', img: null },
+  { t: 'Abrimos à mão', p: 'Cada disco é aberto à mão, sem pressa, um de cada vez.', img: null },
+  { t: 'O forno faz o resto', p: 'No calor do forno a borda cresce, fica alta e ganha pontinhos queimados.', img: 'branca' },
+  { t: 'Chega à mesa', p: 'Sai do forno e vai para a mesa, no salão ou na caixa do delivery.', img: 'pizza' },
+  { t: 'Casa de bairro', p: 'Uma casa pequena de tijolo, na Vila Irmãos Arnoni, perto do Horto Florestal.', img: null },
+];
+---
+<Base
+  titulo="Pizzaria no Tremembé | Artesã Forneria"
+  descricao="Pizza de fermentação longa feita à mão na Vila Irmãos Arnoni, Tremembé. Quinta a domingo. Reserve pelo WhatsApp."
+  caminho="/"
+  jsonld={[restaurante(), faqPage()].filter(Boolean) as object[]}
+>
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={heroSrcset} imagesizes="(max-width: 768px) 78vw, 440px" fetchpriority="high" />
+  <!-- HERO -->
+  <section class="secao-escura hero" aria-labelledby="h1">
+    <div class="container">
+      <p class="sobrancelha">Tremembé · Zona Norte de São Paulo</p>
+      <h1 id="h1">{h1}</h1>
+      <p class="sub">{sub}</p>
+      <Acoes cardapio delivery centro origem="hero" />
+      <div class="medalhao">
+        <Foto src={fachada} alt="Fachada da Artesã Forneria à noite: parede preta, porta de madeira aberta e, ao fundo, o relógio de pêndulo do hall, com tijolo aparente." sizes="(max-width: 768px) 78vw, 440px" widths={[320, 440, 640]} prioridade />
+      </div>
+      <p class="legenda">R. Padre Charton, 109</p>
+    </div>
+  </section>
+
+  <!-- PROCESSO -->
+  <section class="secao secao-escura-2" aria-labelledby="processo-t" data-processo>
+    <div class="container">
+      <p class="sobrancelha">Feita com tempo</p>
+      <h2 class="h2" id="processo-t">Do descanso da massa à sua mesa.</h2>
+      <div class="mt-s"><Fio /></div>
+      <div class="processo mt-l">
+        <Relogio />
+        <ol class="passos">
+          {passos.map((p, i) => (
+            <li class="passo" data-passo>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{p.t}</h3>
+              <p>{p.p}</p>
+              {p.img === 'branca' && (
+                <div class="medalhao">
+                  <Foto src={pizzaBranca} alt="Pizza branca de queijos com borda queimada, dentro de uma caixa octogonal, sendo levada pelas mãos do pizzaiolo." sizes="(max-width: 768px) 70vw, 280px" widths={[280, 420, 500]} />
+                </div>
+              )}
+              {p.img === 'pizza' && (
+                <div class="medalhao">
+                  <Foto src={pizza} alt="Pizza de borda alta e queimada com presunto cru, rúcula e um doce escuro por cima, servida em tábua de madeira." sizes="(max-width: 768px) 70vw, 280px" widths={[280, 420, 640]} />
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARDÁPIO -->
+  <section class="secao secao-creme" aria-labelledby="card-t">
+    <div class="container">
+      <p class="sobrancelha">Cardápio</p>
+      <h2 class="h2" id="card-t">{temCardapio ? 'Para escolher sem pressa.' : 'O cardápio, sem rodeio.'}</h2>
+      <div class="mt-s"><Fio /></div>
+      {destaques.length > 0 ? (
+        <div class="mt-l">
+          {destaques.map((i: any) => (
+            <div class="item">
+              <h3>{i.nome}</h3>
+              <span class="preco">{typeof i.preco === 'number' ? `R$ ${i.preco.toFixed(2).replace('.', ',')}` : ''}</span>
+              {i.ingredientes?.length > 0 && <p>{i.ingredientes.join(', ')}</p>}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p class="lead mt-m">O cardápio completo fica a um toque: veja os sabores, ingredientes e preços e peça em casa ou reserve sua mesa.</p>
+      )}
+      <div class="acoes mt-l">
+        <a class="btn btn-primario" href="/cardapio/">Ver cardápio</a>
+        {deliveryUrl && <a class="btn btn-secundario" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-umami-event="click_delivery">Pedir delivery</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- CASA E BAIRRO -->
+  <section class="secao secao-escura" aria-labelledby="casa-t">
+    <div class="container grade-2">
+      <div>
+        <p class="sobrancelha">Casa e bairro</p>
+        <h2 class="h2" id="casa-t">Uma casa de tijolo no Tremembé.</h2>
+        <div class="mt-s"><Fio /></div>
+        <p class="lead mt-m">Um salão estreito e aconchegante, com tijolo aparente, lâmpadas de filamento e uma adega de vinhos. De quinta a sábado à noite, e no almoço de domingo.</p>
+        <p class="aviso-bebida mt-s">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
+        <p class="mt-m"><a class="link-seta" href="/nossa-casa/">Conheça a casa →</a></p>
+      </div>
+      <figure class="foto-reta">
+        <Foto src={salao} alt="Fundo do salão: parede verde-menta, tijolo aparente, lâmpadas de filamento penduradas e prateleira de vinhos." sizes="(max-width: 900px) 92vw, 520px" widths={[480, 700, 876]} />
+      </figure>
+    </div>
+  </section>
+
+  <!-- RESERVA -->
+  <section class="secao secao-creme" aria-labelledby="reserva-t" id="reserva">
+    <div class="container grade-2">
+      <div>
+        <p class="sobrancelha">Reserva</p>
+        <h2 class="h2" id="reserva-t">Quer mesa? É só chamar.</h2>
+        <div class="mt-s"><Fio /></div>
+        <p class="lead mt-m">Diga o dia, o horário e quantas pessoas. A gente responde pelo WhatsApp, no {config.whatsapp.exibicao}.</p>
+        <p class="mt-m">Funcionamos:</p>
+        <div class="cartao mt-s"><Horarios /></div>
+      </div>
+      <Composer />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="secao secao-escura" aria-labelledby="faq-t">
+    <div class="container">
+      <div class="estreito">
+        <p class="sobrancelha">Perguntas</p>
+        <h2 class="h2" id="faq-t">O que mais perguntam.</h2>
+        <div class="mt-m"><Faq apenasHome /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO CHEGAR -->
+  <section class="secao secao-creme" aria-labelledby="chegar-t" id="como-chegar">
+    <div class="container grade-2">
+      <div>
+        <p class="sobrancelha">Como chegar</p>
+        <h2 class="h2" id="chegar-t">Na Padre Charton, perto do Horto.</h2>
+        <div class="mt-s"><Fio /></div>
+        <address class="dados mt-m">
+          <div><strong>{enderecoLinha1}</strong><br />{enderecoLinha2}</div>
+          <div><a href={`tel:${config.telefone.e164}`} data-umami-event="click_call">{config.telefone.exibicao}</a></div>
+        </address>
+      </div>
+      <MapaEmbed />
+    </div>
+  </section>
+</Base>

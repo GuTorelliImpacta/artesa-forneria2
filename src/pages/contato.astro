@@ -1,0 +1,56 @@
+---
+import Base from '../layouts/Base.astro';
+import Fio from '../components/Fio.astro';
+import Icone from '../components/Icone.astro';
+import Horarios from '../components/Horarios.astro';
+import MapaEmbed from '../components/MapaEmbed.astro';
+import Composer from '../components/Composer.astro';
+import { config, enderecoLinha1, enderecoLinha2, waLink, telLink, rotaLink } from '../lib/site';
+import { restaurante } from '../lib/jsonld';
+---
+<Base
+  titulo="Contato, horários e mapa | Artesã Forneria"
+  descricao="R. Padre Charton, 109, Vila Irmãos Arnoni, Tremembé. Quinta a domingo. WhatsApp (11) 91650-1473, telefone e mapa."
+  caminho="/contato/"
+  jsonld={[restaurante()]}
+>
+  <section class="secao-escura cab-pagina">
+    <div class="container">
+      <p class="sobrancelha">Contato</p>
+      <h1>Venha para a Padre Charton.</h1>
+      <div class="mt-s"><Fio /></div>
+      <div class="acoes mt-m">
+        <a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp" data-umami-event-origem="contato"><Icone nome="chat" />Reservar pelo WhatsApp</a>
+        <a class="btn btn-secundario" href={telLink} data-umami-event="click_call"><Icone nome="fone" />Ligar {config.telefone.exibicao}</a>
+        <a class="btn btn-secundario" href={rotaLink} target="_blank" rel="noopener noreferrer" data-umami-event="click_route"><Icone nome="rota" />Traçar rota</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-creme">
+    <div class="container grade-2">
+      <div>
+        <h2 class="h2">Onde estamos</h2>
+        <dl class="dados mt-m">
+          <div><dt>Endereço</dt><dd>{enderecoLinha1}<br />{enderecoLinha2}<br />{config.endereco.referencia[0].toUpperCase() + config.endereco.referencia.slice(1)}</dd></div>
+          <div><dt>WhatsApp</dt><dd><a href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp">{config.whatsapp.exibicao}</a></dd></div>
+          <div><dt>Telefone</dt><dd><a href={telLink} data-umami-event="click_call">{config.telefone.exibicao}</a></dd></div>
+          <div><dt>E-mail</dt><dd><a href={`mailto:${config.email}`}>{config.email}</a></dd></div>
+          <div><dt>Instagram</dt><dd><a href={config.instagram.url} target="_blank" rel="noopener noreferrer">@{config.instagram.usuario}</a></dd></div>
+        </dl>
+        <div class="cartao mt-l" id="horarios">
+          <h3>Horários</h3>
+          <Horarios />
+          <p class="aviso-bebida mt-s">Feriados e datas especiais: confirme pelo WhatsApp.</p>
+        </div>
+      </div>
+      <MapaEmbed />
+    </div>
+  </section>
+
+  <section class="secao secao-escura">
+    <div class="container">
+      <div class="estreito"><Composer /></div>
+    </div>
+  </section>
+</Base>

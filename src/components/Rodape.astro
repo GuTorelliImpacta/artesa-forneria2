@@ -1,0 +1,39 @@
+---
+import { config, enderecoLinha1, enderecoLinha2, waLink, telLink, deliveryUrl, rotaLink } from '../lib/site';
+import Horarios from './Horarios.astro';
+---
+<footer class="rodape">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h2>{config.nome}</h2>
+        <address class="dados">
+          <span>{enderecoLinha1}<br />{enderecoLinha2}</span>
+          <span><a href={telLink} data-umami-event="click_call">{config.telefone.exibicao}</a><br />
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp">WhatsApp {config.whatsapp.exibicao}</a><br />
+            <a href={`mailto:${config.email}`}>{config.email}</a></span>
+        </address>
+      </div>
+      <div>
+        <h2>Navegar</h2>
+        <ul>
+          <li><a href="/cardapio/">Cardápio</a></li>
+          <li><a href="/nossa-casa/">Nossa casa</a></li>
+          <li><a href="/contato/">Contato e mapa</a></li>
+          <li><a href={rotaLink} target="_blank" rel="noopener noreferrer">Traçar rota</a></li>
+          {deliveryUrl && <li><a href={deliveryUrl} target="_blank" rel="noopener noreferrer">Pedir delivery</a></li>}
+          <li><a href={config.instagram.url} target="_blank" rel="noopener noreferrer">Instagram @{config.instagram.usuario}</a></li>
+          <li><a href="/politica-de-privacidade/">Política de privacidade</a></li>
+        </ul>
+      </div>
+      <div class="escuro">
+        <h2>Horários</h2>
+        <Horarios />
+      </div>
+    </div>
+    <div class="legal">
+      <p>Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
+      <p>© 2026 {config.nome}{config.razaoSocial ? ` · ${config.razaoSocial}` : ''}{config.cnpj ? ` · CNPJ ${config.cnpj}` : ''}</p>
+    </div>
+  </div>
+</footer>

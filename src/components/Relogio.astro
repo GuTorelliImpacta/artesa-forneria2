@@ -1,0 +1,19 @@
+---
+// "Relógio de fermentação": anel que avança com o scroll. Sem JS fica completo.
+import { config } from '../lib/site';
+const ticks = Array.from({ length: 12 }, (_, i) => i);
+const h72 = config.confirmado.fermentacao72h;
+---
+<div class="relogio-wrap">
+  <svg class="relogio" viewBox="0 0 200 200" role="img" aria-label={h72 ? 'Relógio de 0 a 72 horas de fermentação' : 'Linha do tempo do preparo da massa'} data-relogio data-h72={h72 ? '1' : '0'}>
+    <circle class="trilho" cx="100" cy="100" r="85" />
+    <circle class="avanco" cx="100" cy="100" r="85" />
+    {ticks.map((i) => (
+      <line class="marca-h" x1="100" y1="22" x2="100" y2="30" transform={`rotate(${i * 30} 100 100)`} />
+    ))}
+    <line class="ponteiro" x1="100" y1="100" x2="100" y2="44" />
+    <circle cx="100" cy="100" r="6" fill="#EFE8D4" />
+    <text class="centro-txt" x="100" y="148" data-relogio-txt>{h72 ? '72 h' : 'tempo'}</text>
+  </svg>
+  <p class="relogio-rotulo" aria-live="off"><strong data-relogio-titulo>Feita com tempo</strong><span data-relogio-passo>Do descanso da massa à mesa.</span></p>
+</div>

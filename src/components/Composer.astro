@@ -1,0 +1,46 @@
+---
+import Icone from './Icone.astro';
+import { config, waLink } from '../lib/site';
+---
+{config.reservas.mostrarComposer ? (
+  <section class="composer" id="reservar" aria-labelledby="composer-titulo" data-composer data-max={config.reservas.maxPessoas} data-dias={config.reservas.diasAFrente} data-wa={config.whatsapp.numero}>
+    <h3 id="composer-titulo">Reserve sua mesa</h3>
+    <p>Escolha o dia e o horário. Abrimos o WhatsApp com a mensagem pronta.</p>
+    <!-- Sem JavaScript: o link direto abaixo continua funcionando. -->
+    <div data-composer-fallback class="mt-m">
+      <a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp"><Icone nome="chat" />Reservar pelo WhatsApp</a>
+    </div>
+    <form data-composer-form hidden novalidate>
+      <div class="campos">
+        <div class="largo">
+          <label for="r-nome">Seu nome</label>
+          <input id="r-nome" name="nome" type="text" autocomplete="name" maxlength="60" required aria-describedby="e-nome" />
+          <p class="erro" id="e-nome" role="alert"></p>
+        </div>
+        <div>
+          <label for="r-data">Dia</label>
+          <select id="r-data" name="data" required aria-describedby="e-data"></select>
+          <p class="erro" id="e-data" role="alert"></p>
+        </div>
+        <div>
+          <label for="r-hora">Horário</label>
+          <select id="r-hora" name="hora" required aria-describedby="e-hora"></select>
+          <p class="erro" id="e-hora" role="alert"></p>
+        </div>
+        <div class="largo">
+          <label for="r-pessoas">Número de pessoas</label>
+          <input id="r-pessoas" name="pessoas" type="number" inputmode="numeric" min="1" max={config.reservas.maxPessoas} value="2" required aria-describedby="e-pessoas" />
+          <p class="erro" id="e-pessoas" role="alert"></p>
+        </div>
+      </div>
+      <button class="btn btn-primario" type="submit"><Icone nome="chat" />Abrir WhatsApp</button>
+    </form>
+    <p class="nota"><strong>A reserva só vale após a confirmação da casa.</strong> Seus dados não são guardados por este site: ficam só na mensagem que você enviar.</p>
+  </section>
+) : (
+  <section class="composer" id="reservar" aria-labelledby="composer-titulo">
+    <h3 id="composer-titulo">Fale com a gente</h3>
+    <p>Dúvidas sobre mesa, horário ou pedido? Chame no WhatsApp.</p>
+    <div class="mt-m"><a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp"><Icone nome="chat" />Falar no WhatsApp</a></div>
+  </section>
+)}

@@ -1,0 +1,37 @@
+{
+  "nome": "Artesã Forneria",
+  "slogan": "Pizza de fermentação longa, feita à mão no Tremembé.",
+  "url": "https://artesaforneria.com.br",
+  "endereco": {
+    "rua": "R. Padre Charton, 109",
+    "bairro": "Vila Irmãos Arnoni",
+    "cidade": "São Paulo",
+    "uf": "SP",
+    "cep": "02375-070",
+    "regiao": "Tremembé, Zona Norte de São Paulo",
+    "referencia": "perto do Horto Florestal"
+  },
+  "telefone": { "exibicao": "(11) 2994-4246", "e164": "+551129944246" },
+  "whatsapp": { "exibicao": "(11) 91650-1473", "numero": "5511916501473" },
+  "email": "artesaforneria@gmail.com",
+  "instagram": { "usuario": "artesaforneria", "url": "https://www.instagram.com/artesaforneria/" },
+  "delivery": { "yoogaUrl": null },
+  "mapa": {
+    "embedUrl": null,
+    "coordenadas": null
+  },
+  "reservas": {
+    "mostrarComposer": true,
+    "aceitaReservaConfirmado": false,
+    "maxPessoas": 20,
+    "diasAFrente": 60
+  },
+  "confirmado": {
+    "fermentacao72h": false,
+    "fornoALenha": false,
+    "historia": false
+  },
+  "razaoSocial": null,
+  "cnpj": null,
+  "mensagemWhatsapp": "Olá! Vi o site da Artesã Forneria e gostaria de reservar uma mesa."
+}

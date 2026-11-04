@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import Seo from '../components/Seo.astro';
+import Topo from '../components/Topo.astro';
+import BarraAcoes from '../components/BarraAcoes.astro';
+import Rodape from '../components/Rodape.astro';
+import { H } from '../lib/site';
+
+interface Props {
+  titulo: string; descricao: string; caminho: string; imagem?: string; noindex?: boolean;
+  jsonld?: object[]; atual?: string; evento?: string;
+}
+const { titulo, descricao, caminho, imagem, noindex, jsonld = [], atual = caminho, evento } = Astro.props;
+const umami = import.meta.env.PUBLIC_UMAMI_ID;
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0D0D0C" />
+    <meta name="format-detection" content="telephone=no" />
+    <Seo titulo={titulo} descricao={descricao} caminho={caminho} imagem={imagem} noindex={noindex} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/young-serif-400.woff2" as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+    {jsonld.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+    {umami && <script defer src="https://cloud.umami.is/script.js" data-website-id={umami}></script>}
+  </head>
+  <body data-evento={evento}>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+    <Topo atual={atual} />
+    <main id="conteudo" tabindex="-1">
+      <slot />
+    </main>
+    <Rodape />
+    <BarraAcoes />
+    <script id="dados-horarios" type="application/json" set:html={JSON.stringify(H)} />
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>
