@@ -1,0 +1,24 @@
+---
+import { avaliacoes, avaliacoesLink } from '../lib/site';
+const itens = avaliacoes.itens as { nome: string; nota: number; texto: string; fonte: string; data?: string }[];
+---
+<section class="secao secao-creme aval" id="avaliacoes" aria-labelledby="aval-t">
+  <div class="container">
+    <p class="sobrancelha">Avaliações</p>
+    <h2 class="h2" id="aval-t">Quem conhece, sempre tem uma história para contar.</h2>
+    {itens.length > 0 ? (
+      <ul class="cartoes-aval">
+        {itens.map((a) => (
+          <li class="cartao-aval">
+            <p class="nota" aria-label={`Nota ${a.nota} de 5`}>{'★'.repeat(a.nota)}<span aria-hidden="true" class="apagado">{'★'.repeat(5 - a.nota)}</span></p>
+            <blockquote>“{a.texto}”</blockquote>
+            <footer>{a.nome} · {a.fonte}{a.data ? `, ${a.data}` : ''}</footer>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="lead mt-m suave">Leia o que quem já esteve na Artesã escreveu sobre a casa.</p>
+    )}
+    <div class="mt-l"><a class="btn btn-primario" href={avaliacoesLink} target="_blank" rel="noopener noreferrer">Ver avaliações no Google</a></div>
+  </div>
+</section>

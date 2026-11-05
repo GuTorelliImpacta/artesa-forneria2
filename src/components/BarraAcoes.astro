@@ -1,9 +1,0 @@
----
-import Icone from './Icone.astro';
-import { waLink, telLink, rotaLink } from '../lib/site';
----
-<nav class="barra-acoes" aria-label="Ações rápidas">
-  <a href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp" data-umami-event-origem="barra"><Icone nome="chat" />WhatsApp</a>
-  <a href={telLink} data-umami-event="click_call"><Icone nome="fone" />Ligar</a>
-  <a href={rotaLink} target="_blank" rel="noopener noreferrer" data-umami-event="click_route"><Icone nome="rota" />Rota</a>
-</nav>

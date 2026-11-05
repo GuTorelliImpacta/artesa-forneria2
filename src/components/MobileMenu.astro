@@ -1,0 +1,10 @@
+---
+interface Props { links: { href: string; rotulo: string }[]; atual: string }
+const { links, atual } = Astro.props;
+---
+<details class="nav-m" data-menu-m>
+  <summary aria-label="Abrir menu"><span>Menu</span></summary>
+  <nav class="painel" aria-label="Menu principal">
+    {links.map((l) => <a href={l.href} aria-current={atual === l.href ? 'page' : undefined} data-evt={l.href === '/cardapio/' ? 'click_menu' : undefined}>{l.rotulo}</a>)}
+  </nav>
+</details>

@@ -9,47 +9,46 @@ import letreiro from '../assets/letreiro.jpg';
 import adega from '../assets/salao-adega.jpg';
 ---
 <Base
-  titulo="Nossa casa | Artesã Forneria, Tremembé"
-  descricao="Conheça a casa de tijolo da Artesã Forneria, na Vila Irmãos Arnoni: salão aconchegante, adega e pizza de fermentação longa."
+  titulo="Nossa história | Artesã Forneria, Tremembé"
+  descricao="Conheça a Artesã Forneria: pizzaria artesanal de tijolo e adega na Vila Irmãos Arnoni, Tremembé, com massa que recebe tempo."
   caminho="/nossa-casa/"
   jsonld={[faqPage()].filter(Boolean) as object[]}
 >
   <section class="secao-escura cab-pagina">
     <div class="container grade-2">
       <div>
-        <p class="sobrancelha">Nossa casa</p>
-        <h1>Casa pequena, forno quente, porta aberta.</h1>
-        <div class="mt-s"><Fio /></div>
-        <p class="lead mt-m">A Artesã Forneria fica na Rua Padre Charton, na Vila Irmãos Arnoni, perto do Horto Florestal. É uma casa de bairro: tijolo aparente, luz baixa e pizza feita à mão.</p>
+        <p class="sobrancelha">Nossa história</p>
+        <h1>A arte está em cada detalhe.</h1>
+        <div class="mt-m"><Fio /></div>
+        <p class="lead mt-m">A Artesã Forneria fica na Rua Padre Charton, na Vila Irmãos Arnoni, perto do Horto Florestal. É uma casa de bairro: tijolo aparente, luz baixa e pizza feita com tempo.</p>
       </div>
-      <div class="medalhao peq">
-        <Foto src={letreiro} alt="Letreiro cursivo dourado e iluminado, “Artesã Forneria”, sobre a fachada preta." sizes="(max-width: 900px) 70vw, 340px" widths={[310]} prioridade />
+      <div class="moldura peq">
+        <Foto src={letreiro} alt="Letreiro cursivo dourado e iluminado, “Artesã Forneria”, sobre a fachada preta." sizes="(max-width: 900px) 80vw, 380px" widths={[310]} prioridade />
       </div>
-    </div>
-  </section>
-
-  <section class="secao secao-escura-2">
-    <div class="container grade-2">
-      <div class="prosa">
-        <p class="sobrancelha">O ambiente</p>
-        <h2 class="h2">Um corredor de tijolo, vinho e lâmpadas de filamento.</h2>
-        <p>Por dentro, o salão é estreito e acolhedor: tijolo aparente, uma parede verde-menta e lâmpadas de filamento acesas sobre as mesas.</p>
-        <p>No fundo do salão, um armário de madeira guarda a adega de vinhos. Na entrada, um relógio de pêndulo marca o hall e lembra o que a casa faz: pizza com tempo.</p>
-        <p class="aviso-bebida">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
-      </div>
-      <figure class="foto-reta peq">
-        <Foto src={adega} alt="Armário de madeira com adega de vinhos e taças, na parede verde do salão." sizes="(max-width: 900px) 70vw, 320px" widths={[221]} />
-      </figure>
     </div>
   </section>
 
   <section class="secao secao-creme">
-    <div class="container">
+    <div class="container grade-2">
       <div class="prosa">
         <p class="sobrancelha">A pizza</p>
-        <h2 class="h2">Fermentação longa, feita à mão.</h2>
-        <p>A massa descansa por bastante tempo antes de ir ao forno. É esse descanso que deixa a borda alta, leve por dentro e dourada, com pontinhos queimados por fora.</p>
-        <p>Cada disco é aberto à mão. O cardápio completo está na página de <a href="/cardapio/">cardápio</a>.</p>
+        <h2 class="h2">Uma boa pizza começa muito antes do forno.</h2>
+        <p>Cada massa recebe o tempo necessário para desenvolver textura, aroma e sabor. Trabalhamos com ingredientes selecionados e valorizamos cada etapa do preparo.</p>
+        <p>Veja as pizzas e os preços no <a href="/cardapio/">cardápio</a>.</p>
+      </div>
+      <figure class="moldura peq">
+        <Foto src={adega} alt="Armário de madeira com adega de vinhos e taças, na parede verde do salão." sizes="(max-width: 900px) 60vw, 300px" widths={[221]} />
+      </figure>
+    </div>
+  </section>
+
+  <section class="secao secao-escura-2">
+    <div class="container">
+      <div class="prosa">
+        <p class="sobrancelha">A casa</p>
+        <h2 class="h2">Tijolo, vinho e lâmpadas de filamento.</h2>
+        <p>O salão é estreito e acolhedor: tijolo aparente, uma parede verde-menta e lâmpadas de filamento acesas sobre as mesas. No fundo, um armário de madeira guarda a adega.</p>
+        <p class="aviso-bebida">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
       </div>
     </div>
   </section>
@@ -60,7 +59,7 @@ import adega from '../assets/salao-adega.jpg';
         <p class="sobrancelha">Perguntas</p>
         <h2 class="h2">Sobre a casa e a massa.</h2>
         <div class="mt-m"><Faq /></div>
-        <div class="mt-l"><Acoes cardapio origem="nossa-casa" /></div>
+        <div class="mt-l"><Acoes cardapio /></div>
       </div>
     </div>
   </section>

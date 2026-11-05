@@ -20,11 +20,11 @@ const brl = (n: number) => `R$ ${n.toFixed(2).replace('.', ',')}`;
     <div class="container grade-2">
       <div>
         <p class="sobrancelha">Cardápio</p>
-        <h1>Pizza para dividir, mesa para ficar.</h1>
+        <h1>Escolha por onde começar.</h1>
         <div class="mt-s"><Fio /></div>
         <p class="lead mt-m">Sabores, ingredientes e preços em texto, para ler com calma no celular.</p>
       </div>
-      <div class="medalhao peq">
+      <div class="moldura peq">
         <Foto src={borda} alt="Detalhe da borda alta e queimada de uma pizza, com presunto cru e rúcula." sizes="(max-width: 900px) 70vw, 320px" widths={[320, 520]} prioridade />
       </div>
     </div>
@@ -59,15 +59,11 @@ const brl = (n: number) => `R$ ${n.toFixed(2).replace('.', ',')}`;
               : 'Estamos montando o cardápio completo aqui. Enquanto isso, pergunte os sabores do dia pelo WhatsApp.'}
           </p>
           <div class="acoes centro mt-m">
-            {deliveryUrl && <a class="btn btn-primario" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-umami-event="click_delivery">Ver cardápio e pedir</a>}
-            <a class={deliveryUrl ? 'btn btn-secundario' : 'btn btn-primario'} href={waLink('Olá! Gostaria de saber os sabores do cardápio da Artesã Forneria.')} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp" data-umami-event-origem="cardapio"><Icone nome="chat" />Perguntar no WhatsApp</a>
+            {deliveryUrl && <a class="btn btn-primario" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-evt="click_menu">Ver cardápio e pedir</a>}
+            <a class={deliveryUrl ? 'btn btn-secundario' : 'btn btn-primario'} href={waLink('Olá! Gostaria de saber os sabores do cardápio da Artesã Forneria.')} target="_blank" rel="noopener noreferrer"><Icone nome="chat" />Perguntar no WhatsApp</a>
           </div>
         </div>
       )}
-      <div class="barra-fixa-cardapio">
-        {deliveryUrl && <a class="btn btn-secundario btn-pequeno" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-umami-event="click_delivery">Pedir delivery</a>}
-        <a class="btn btn-primario btn-pequeno" href="/contato/#reservar">Reservar</a>
-      </div>
-    </div>
+          </div>
   </section>
 </Base>

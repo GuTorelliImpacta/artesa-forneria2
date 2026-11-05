@@ -1,0 +1,31 @@
+---
+import Foto from './Foto.astro';
+import porta from '../assets/fachada-porta.jpg';
+import salao from '../assets/salao-fundo.jpg';
+import letreiro from '../assets/letreiro.jpg';
+import adega from '../assets/salao-adega.jpg';
+const itens = [
+  { img: salao, alt: 'Fundo do salão: parede verde-menta, tijolo aparente, lâmpadas de filamento penduradas e prateleira de vinhos.', cap: 'O salão, de tijolo e luz baixa', w: [480, 768, 876] },
+  { img: porta, alt: 'Porta de madeira aberta na fachada preta, com tijolo aparente e um relógio de pêndulo no hall.', cap: 'A entrada, com o relógio de pêndulo', w: [480, 650] },
+  { img: adega, alt: 'Armário de madeira com adega de vinhos e taças, na parede verde do salão.', cap: 'A adega', w: [221] },
+  { img: letreiro, alt: 'Letreiro cursivo dourado e iluminado, “Artesã Forneria”, sobre a fachada preta.', cap: 'O letreiro, aceso à noite', w: [310] },
+];
+---
+<section class="secao secao-escura" id="experiencia" aria-labelledby="exp-t">
+  <div class="container">
+    <div class="estreito centrado rev">
+      <p class="sobrancelha">Ambiente e experiência</p>
+      <h2 class="h2" id="exp-t">Um lugar para desacelerar e aproveitar.</h2>
+      <p class="lead mt-m">Seja para um encontro especial, uma reunião entre amigos ou simplesmente para aproveitar uma boa pizza, a Artesã é o lugar para transformar momentos simples em boas lembranças.</p>
+      <p class="aviso-bebida mt-m">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
+    </div>
+    <div class="galeria" role="list" aria-label="Fotos do ambiente" tabindex="0">
+      {itens.map((i) => (
+        <figure role="listitem">
+          <Foto src={i.img} alt={i.alt} sizes="(min-width: 900px) 580px, 82vw" widths={i.w} />
+          <figcaption>{i.cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>

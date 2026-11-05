@@ -11,13 +11,13 @@ const tok = Object.fromEntries([...css.matchAll(/--color-([\w-]+):\s*(#[0-9A-Fa-
 const lum = (h) => { const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4)); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
 const cr = (a, b) => { const [x, y] = [lum(tok[a]), lum(tok[b])].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
 const pares = [
-  ['creme', 'carvao', 4.5], ['areia', 'carvao', 4.5], ['areia', 'carvao-2', 4.5], ['creme', 'carvao-2', 4.5],
-  ['carvao', 'creme', 4.5], ['carvao', 'tijolo-texto', 0], ['tijolo-texto', 'creme', 4.5],
-  ['creme', 'tijolo-botao', 4.5], ['cobre', 'carvao', 4.5], ['cobre', 'carvao-2', 4.5],
-  ['tijolo', 'carvao', 3], // só gráfico/texto grande
+  ['creme', 'marrom', 4.5], ['areia', 'marrom', 4.5], ['areia', 'marrom-2', 4.5], ['creme', 'marrom-2', 4.5],
+  ['marrom', 'creme', 4.5], ['terracota', 'creme', 4.5], ['creme', 'terracota', 4.5], ['creme', 'terracota-escuro', 4.5],
+  ['ouro', 'marrom', 4.5], ['ouro', 'marrom-2', 4.5], ['cinza-escuro', 'creme', 4.5], ['oliva-escuro', 'creme', 4.5],
+  ['marrom', 'ouro', 4.5],
 ];
 for (const [a, b, min] of pares) if (min) ok(cr(a, b) >= min, `contraste ${a} / ${b} = ${cr(a, b).toFixed(2)} (mín ${min})`);
-console.log(`ℹ tijolo sobre carvão = ${cr('tijolo', 'carvao').toFixed(2)} (só elementos gráficos)`);
+console.log(`ℹ cinza (#746C62) sobre creme = ${cr('cinza', 'creme').toFixed(2)}; oliva sobre creme = ${cr('oliva', 'creme').toFixed(2)} (usar só em elementos gráficos/texto grande)`);
 
 // 2. Dados
 const cfg = JSON.parse(fs.readFileSync('src/content/config.json', 'utf8'));

@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import Fio from '../components/Fio.astro';
 import Acoes from '../components/Acoes.astro';
-import Foto from '../components/Foto.astro';
 ---
 <Base titulo="Página não encontrada | Artesã Forneria" descricao="Essa página saiu do forno e não voltou. Veja o cardápio ou fale com a gente." caminho="/404/" noindex>
   <section class="secao secao-escura centrado">
@@ -11,7 +10,7 @@ import Foto from '../components/Foto.astro';
       <h1 class="h2">Essa página não está no cardápio.</h1>
       <div class="mt-s"><Fio centro /></div>
       <p class="lead mt-m">O endereço pode ter mudado. Escolha um caminho:</p>
-      <div class="mt-m"><Acoes cardapio centro origem="404" /></div>
+      <div class="mt-m"><Acoes cardapio /></div>
       <p class="mt-m"><a class="link-seta" href="/">Voltar ao início →</a></p>
     </div>
   </section>

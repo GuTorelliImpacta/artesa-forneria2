@@ -1,0 +1,20 @@
+---
+import Foto from './Foto.astro';
+import { config, H } from '../lib/site';
+import { fmtHora } from '../lib/horarios';
+import pizza from '../assets/pizza-presunto-rucula.jpg';
+---
+<section class="hero" aria-labelledby="h1">
+  <div class="hero-foto">
+    <Foto src={pizza} alt="Pizza de borda alta e queimada com presunto cru, rúcula e um doce escuro por cima, em tábua de madeira." sizes="(min-width: 1024px) 72vw, 100vw" widths={[480, 768, 1206]} quality={42} prioridade />
+  </div>
+  <div class="container hero-conteudo">
+    <p class="pilula" data-status data-aberto="nao"><span class="ponto" aria-hidden="true"></span><span data-status-txt>Quinta a domingo · {config.endereco.referencia}</span></p>
+    <h1 id="h1">{config.slogan}</h1>
+    <p class="sub">Ingredientes selecionados, fermentação cuidadosa e o sabor inconfundível de uma pizza artesanal.</p>
+    <div class="acoes">
+      <a class="btn btn-primario" href="/cardapio/" data-evt="click_menu">Conheça nosso cardápio</a>
+      <a class="btn btn-secundario" href="/#reservas" data-evt="click_reservation">Reserve sua mesa</a>
+    </div>
+  </div>
+</section>

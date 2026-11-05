@@ -1,0 +1,32 @@
+---
+import ProductCard from './ProductCard.astro';
+import { cardapio, deliveryUrl } from '../lib/site';
+import centro from '../assets/pizza-centro.jpg';
+import branca from '../assets/pizza-branca.jpg';
+
+// Só dados reais: itens do cardápio.json marcados como destaque. Sem eles, fotos reais com legenda do que se vê.
+const destaques = (cardapio.categorias as any[]).flatMap((c) => (c.itens as any[]).filter((i) => i.destaque && i.foto !== false)).slice(0, 6);
+const fotosReais = [
+  { img: centro, alt: 'Pizza com presunto cru, rúcula e colheradas de um doce escuro, sobre molho de tomate.', descricao: 'Presunto cru, rúcula e um doce escuro sobre molho de tomate.' },
+  { img: branca, alt: 'Pizza branca de queijos, com borda dourada e queimada.', descricao: 'Pizza branca de queijos, de borda dourada.' },
+];
+---
+<section class="secao secao-creme" id="cardapio" aria-labelledby="cardapio-t">
+  <div class="container">
+    <div class="estreito centrado rev">
+      <p class="sobrancelha">Cardápio</p>
+      <h2 class="h2" id="cardapio-t">Escolha por onde começar.</h2>
+      <p class="lead mt-m suave">Algumas pizzas da casa. Sabores, ingredientes e preços completos no cardápio oficial.</p>
+    </div>
+    <div class="pratos">
+      {destaques.length > 0
+        ? destaques.map((i: any) => <ProductCard nome={i.nome} descricao={(i.ingredientes ?? []).join(', ')} preco={i.preco} img={centro} alt={i.nome} />)
+        : fotosReais.map((f) => <ProductCard {...f} />)}
+    </div>
+    <div class="acoes mt-l">
+      {deliveryUrl
+        ? <a class="btn btn-primario" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-evt="click_menu">Explorar cardápio completo</a>
+        : <a class="btn btn-primario" href="/cardapio/" data-evt="click_menu">Explorar cardápio completo</a>}
+    </div>
+  </div>
+</section>

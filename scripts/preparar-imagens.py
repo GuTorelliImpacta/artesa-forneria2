@@ -19,9 +19,15 @@ crop("fachada-noite.jpg", (790, 40, 1100, 330), "letreiro.jpg")
 crop("salao.jpg", (330, 0, 1206, 395), "salao-fundo.jpg")
 # Adega: armario de madeira a direita
 crop("salao.jpg", (985, 0, 1206, 620), "salao-adega.jpg")
-# Pizza inteira e detalhe da borda
+# Pizza inteira (hero) e detalhes
 crop("pizza-presunto-rucula.jpg", (0, 40, 1206, 1190), "pizza-presunto-rucula.jpg")
 crop("pizza-presunto-rucula.jpg", (0, 560, 520, 1000), "pizza-borda.jpg")
+crop("pizza-presunto-rucula.jpg", (640, 60, 1206, 540), "pizza-forno.jpg")
+crop("pizza-presunto-rucula.jpg", (170, 220, 900, 900), "pizza-centro.jpg")
+# Potinhos de molhos e limoes (parte de baixo da mesa: sem embalagens de marca)
+crop("mesa-molhos.jpg", (330, 610, 1206, 1172), "ingredientes-molhos.jpg")
+# Pizza branca (so a pizza)
+crop("pizzaiolo-pizza-branca.jpg", (262, 620, 650, 930), "pizza-branca.jpg")
 # Pizza branca na caixa (so maos e pizza, sem rosto)
 crop("pizzaiolo-pizza-branca.jpg", (200, 530, 700, 960), "pizza-branca-caixa.jpg")
 

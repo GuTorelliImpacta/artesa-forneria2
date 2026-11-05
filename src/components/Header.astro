@@ -1,0 +1,30 @@
+---
+import { Image } from 'astro:assets';
+import MobileMenu from './MobileMenu.astro';
+import logo from '../assets/logo-disco.png';
+import { config } from '../lib/site';
+interface Props { atual: string; transparente?: boolean }
+const { atual, transparente = false } = Astro.props;
+const links = [
+  { href: '/', rotulo: 'Início' },
+  { href: '/nossa-casa/', rotulo: 'Nossa história' },
+  { href: '/cardapio/', rotulo: 'Cardápio' },
+  { href: '/#experiencia', rotulo: 'Experiência' },
+  { href: '/#localizacao', rotulo: 'Localização' },
+];
+---
+<header class:list={['header', { solido: !transparente }]} data-header data-transparente={transparente ? '1' : '0'}>
+  <div class="container cab">
+    <a class="marca" href="/" aria-label={`${config.nome}, página inicial`}>
+      <Image src={logo} alt="" width={46} height={46} densities={[1, 2]} loading="eager" />
+      <span>{config.nome}</span>
+    </a>
+    <div class="cab-acoes">
+      <nav class="nav-d" aria-label="Principal">
+        {links.map((l) => <a class="nl" href={l.href} aria-current={atual === l.href ? 'page' : undefined} data-evt={l.href === '/cardapio/' ? 'click_menu' : undefined}>{l.rotulo}</a>)}
+      </nav>
+      <a class="btn btn-primario btn-pequeno" href="/#reservas" data-evt="click_reservation">Reservar</a>
+      <MobileMenu links={links} atual={atual} />
+    </div>
+  </div>
+</header>

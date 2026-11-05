@@ -1,20 +1,35 @@
-// Único ponto de entrada de JS: status "aberto agora", composer e relógio. Sem dependências.
+// Único ponto de entrada de JS: header, status "aberto agora", reservas e eventos. Sem dependências.
 import { statusAgora, type Horarios } from '../lib/horarios';
+import { iniciaCliques, track } from './track';
 
 document.documentElement.classList.add('js');
 
+// Header transparente sobre o hero; sólido ao rolar.
+const header = document.querySelector<HTMLElement>('[data-header]');
+if (header && header.dataset.transparente === '1') {
+  const aplica = () => header.classList.toggle('rolou', scrollY > 24);
+  aplica();
+  addEventListener('scroll', aplica, { passive: true });
+}
+
+// Menu mobile: fecha ao escolher um item ou ao pressionar Esc.
+const menu = document.querySelector<HTMLDetailsElement>('[data-menu-m]');
+if (menu) {
+  menu.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) menu.open = false; });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
+}
+
+// Status e horários
 const el = document.getElementById('dados-horarios');
 const horarios: Horarios | null = el ? JSON.parse(el.textContent || 'null') : null;
-
 function atualizaStatus() {
   if (!horarios) return;
   const s = statusAgora(horarios);
-  const barra = document.querySelector<HTMLElement>('[data-status]');
-  const txt = document.querySelector<HTMLElement>('[data-status-txt]');
-  if (!barra || !txt) return;
-  barra.dataset.aberto = s.aberto ? 'sim' : 'nao';
-  txt.textContent = s.texto;
-  // destaca a linha de hoje nas tabelas
+  document.querySelectorAll<HTMLElement>('[data-status]').forEach((barra) => {
+    barra.dataset.aberto = s.aberto ? 'sim' : 'nao';
+    const txt = barra.querySelector<HTMLElement>('[data-status-txt]');
+    if (txt) txt.textContent = s.texto;
+  });
   const hoje = new Date().toLocaleDateString('en-US', { weekday: 'long', timeZone: horarios.fuso });
   const map: Record<string, string> = { Monday: 'Segunda a quarta', Tuesday: 'Segunda a quarta', Wednesday: 'Segunda a quarta', Thursday: 'Quinta', Friday: 'Sexta e sábado', Saturday: 'Sexta e sábado', Sunday: 'Domingo' };
   document.querySelectorAll<HTMLElement>('.horarios tr[data-dias]').forEach((tr) => tr.classList.toggle('hoje', tr.dataset.dias === map[hoje]));
@@ -22,18 +37,17 @@ function atualizaStatus() {
 atualizaStatus();
 setInterval(atualizaStatus, 60_000);
 
-if (document.querySelector('[data-composer-form]') && horarios) {
-  import('./composer').then((m) => m.iniciaComposer(horarios));
+// Reservas via WhatsApp
+if (document.querySelector('[data-reserva-form]') && horarios) {
+  import('./reserva').then((m) => m.iniciaReserva(horarios));
 }
-if (document.querySelector('[data-relogio]')) {
-  import('./relogio').then((m) => m.iniciaRelogio());
-}
-if (document.body.dataset.evento) {
-  const nome = document.body.dataset.evento;
-  const tenta = (n = 0) => {
-    const u = (window as unknown as { umami?: { track: (e: string) => void } }).umami;
-    if (u) u.track(nome);
-    else if (n < 20) setTimeout(() => tenta(n + 1), 250);
-  };
-  tenta();
-}
+
+// Entrada suave das seções
+const revs = document.querySelectorAll('.rev');
+if (revs.length && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+  revs.forEach((r) => io.observe(r));
+} else revs.forEach((r) => r.classList.add('in'));
+
+iniciaCliques();
+if (document.body.dataset.evento) track(document.body.dataset.evento);

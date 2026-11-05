@@ -1,6 +1,6 @@
 {
   "nome": "Artesã Forneria",
-  "slogan": "Pizza de fermentação longa, feita à mão no Tremembé.",
+  "slogan": "Mais que uma pizza. Uma experiência feita para ser apreciada.",
   "url": "https://artesaforneria.com.br",
   "endereco": {
     "rua": "R. Padre Charton, 109",
@@ -11,11 +11,23 @@
     "regiao": "Tremembé, Zona Norte de São Paulo",
     "referencia": "perto do Horto Florestal"
   },
-  "telefone": { "exibicao": "(11) 2994-4246", "e164": "+551129944246" },
-  "whatsapp": { "exibicao": "(11) 91650-1473", "numero": "5511916501473" },
+  "telefone": {
+    "exibicao": "(11) 2994-4246",
+    "e164": "+551129944246"
+  },
+  "whatsapp": {
+    "exibicao": "(11) 91650-1473",
+    "numero": "5511916501473"
+  },
   "email": "artesaforneria@gmail.com",
-  "instagram": { "usuario": "artesaforneria", "url": "https://www.instagram.com/artesaforneria/" },
-  "delivery": { "yoogaUrl": null },
+  "instagram": {
+    "usuario": "artesaforneria",
+    "url": "https://www.instagram.com/artesaforneria/"
+  },
+  "delivery": {
+    "yoogaUrl": "https://delivery.yooga.app",
+    "urlDaLojaConfirmada": false
+  },
   "mapa": {
     "embedUrl": null,
     "coordenadas": null
@@ -33,5 +45,7 @@
   },
   "razaoSocial": null,
   "cnpj": null,
-  "mensagemWhatsapp": "Olá! Vi o site da Artesã Forneria e gostaria de reservar uma mesa."
+  "mensagemWhatsapp": "Olá! Vi o site da Artesã Forneria e gostaria de falar com vocês.",
+  "descricao": "Pizzaria artesanal no Tremembé, Zona Norte de São Paulo. Massa com tempo, ingredientes selecionados e uma casa de tijolo para aproveitar sem pressa.",
+  "avaliacoesUrl": "https://www.google.com/maps/search/?api=1&query=Artes%C3%A3%20Forneria%2C%20R.%20Padre%20Charton%2C%20109%20-%20Vila%20Irmaos%20Arnoni%2C%20S%C3%A3o%20Paulo%20-%20SP"
 }

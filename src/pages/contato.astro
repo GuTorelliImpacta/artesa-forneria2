@@ -3,8 +3,8 @@ import Base from '../layouts/Base.astro';
 import Fio from '../components/Fio.astro';
 import Icone from '../components/Icone.astro';
 import Horarios from '../components/Horarios.astro';
-import MapaEmbed from '../components/MapaEmbed.astro';
-import Composer from '../components/Composer.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import ReservationForm from '../components/ReservationForm.astro';
 import { config, enderecoLinha1, enderecoLinha2, waLink, telLink, rotaLink } from '../lib/site';
 import { restaurante } from '../lib/jsonld';
 ---
@@ -20,9 +20,9 @@ import { restaurante } from '../lib/jsonld';
       <h1>Venha para a Padre Charton.</h1>
       <div class="mt-s"><Fio /></div>
       <div class="acoes mt-m">
-        <a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp" data-umami-event-origem="contato"><Icone nome="chat" />Reservar pelo WhatsApp</a>
-        <a class="btn btn-secundario" href={telLink} data-umami-event="click_call"><Icone nome="fone" />Ligar {config.telefone.exibicao}</a>
-        <a class="btn btn-secundario" href={rotaLink} target="_blank" rel="noopener noreferrer" data-umami-event="click_route"><Icone nome="rota" />Traçar rota</a>
+        <a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer"><Icone nome="chat" />Reservar pelo WhatsApp</a>
+        <a class="btn btn-secundario" href={telLink} data-evt="click_call"><Icone nome="fone" />Ligar {config.telefone.exibicao}</a>
+        <a class="btn btn-secundario" href={rotaLink} target="_blank" rel="noopener noreferrer" data-evt="maps_click"><Icone nome="rota" />Traçar rota</a>
       </div>
     </div>
   </section>
@@ -33,8 +33,8 @@ import { restaurante } from '../lib/jsonld';
         <h2 class="h2">Onde estamos</h2>
         <dl class="dados mt-m">
           <div><dt>Endereço</dt><dd>{enderecoLinha1}<br />{enderecoLinha2}<br />{config.endereco.referencia[0].toUpperCase() + config.endereco.referencia.slice(1)}</dd></div>
-          <div><dt>WhatsApp</dt><dd><a href={waLink()} target="_blank" rel="noopener noreferrer" data-umami-event="click_whatsapp">{config.whatsapp.exibicao}</a></dd></div>
-          <div><dt>Telefone</dt><dd><a href={telLink} data-umami-event="click_call">{config.telefone.exibicao}</a></dd></div>
+          <div><dt>WhatsApp</dt><dd><a href={waLink()} target="_blank" rel="noopener noreferrer">{config.whatsapp.exibicao}</a></dd></div>
+          <div><dt>Telefone</dt><dd><a href={telLink} data-evt="click_call">{config.telefone.exibicao}</a></dd></div>
           <div><dt>E-mail</dt><dd><a href={`mailto:${config.email}`}>{config.email}</a></dd></div>
           <div><dt>Instagram</dt><dd><a href={config.instagram.url} target="_blank" rel="noopener noreferrer">@{config.instagram.usuario}</a></dd></div>
         </dl>
@@ -44,13 +44,13 @@ import { restaurante } from '../lib/jsonld';
           <p class="aviso-bebida mt-s">Feriados e datas especiais: confirme pelo WhatsApp.</p>
         </div>
       </div>
-      <MapaEmbed />
+      <MapEmbed />
     </div>
   </section>
 
   <section class="secao secao-escura">
     <div class="container">
-      <div class="estreito"><Composer /></div>
+      <div class="estreito"><ReservationForm /></div>
     </div>
   </section>
 </Base>

@@ -2,9 +2,10 @@ import config from '../content/config.json';
 import horarios from '../content/horarios.json';
 import cardapio from '../content/cardapio.json';
 import faq from '../content/faq.json';
+import avaliacoes from '../content/avaliacoes.json';
 import { fmtHora, type Horarios } from './horarios';
 
-export { config, horarios, cardapio, faq };
+export { config, horarios, cardapio, faq, avaliacoes };
 export const H = horarios as Horarios;
 
 const e = config.endereco;
@@ -17,6 +18,7 @@ export const waLink = (texto: string = config.mensagemWhatsapp) =>
 export const telLink = `tel:${config.telefone.e164}`;
 export const rotaLink = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(enderecoCompleto.replace('Irmãos', 'Irmaos'))}`;
 export const mapaAbrirLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(enderecoCompleto.replace('Irmãos', 'Irmaos'))}`;
+export const avaliacoesLink = config.avaliacoesUrl;
 export const mapaEmbed =
   config.mapa.embedUrl ??
   'https://www.google.com/maps?q=' + encodeURIComponent('R. Padre Charton, 109 - Vila Irmaos Arnoni, São Paulo - SP, 02375-070') + '&output=embed';

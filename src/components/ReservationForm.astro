@@ -1,0 +1,44 @@
+---
+import Icone from './Icone.astro';
+import { config, waLink } from '../lib/site';
+---
+<section class="reserva" id="reservas" aria-labelledby="reserva-t" data-reserva data-max={config.reservas.maxPessoas} data-dias={config.reservas.diasAFrente} data-wa={config.whatsapp.numero}>
+  <h3 id="reserva-t">Reserve sua mesa</h3>
+  <p>Escolha o dia e o horário. Abrimos o WhatsApp com a mensagem pronta para enviar.</p>
+  <!-- Sem JavaScript, o link direto continua funcionando. -->
+  <div data-reserva-fallback class="mt-m">
+    <a class="btn btn-primario" href={waLink('Olá! Gostaria de fazer uma reserva na Artesã Forneria.')} target="_blank" rel="noopener noreferrer"><Icone nome="chat" />Reservar pelo WhatsApp</a>
+  </div>
+  <form data-reserva-form hidden novalidate>
+    <div class="campos">
+      <div class="largo">
+        <label for="r-nome">Nome</label>
+        <input id="r-nome" name="nome" type="text" autocomplete="name" maxlength="60" required aria-describedby="e-nome" />
+        <p class="erro" id="e-nome" role="alert"></p>
+      </div>
+      <div>
+        <label for="r-data">Data</label>
+        <select id="r-data" name="data" required aria-describedby="e-data"></select>
+        <p class="erro" id="e-data" role="alert"></p>
+      </div>
+      <div>
+        <label for="r-hora">Horário</label>
+        <select id="r-hora" name="hora" required aria-describedby="e-hora"></select>
+        <p class="erro" id="e-hora" role="alert"></p>
+      </div>
+      <div class="largo">
+        <label for="r-pessoas">Quantidade de pessoas</label>
+        <input id="r-pessoas" name="pessoas" type="number" inputmode="numeric" min="1" max={config.reservas.maxPessoas} value="2" required aria-describedby="e-pessoas" />
+        <p class="erro" id="e-pessoas" role="alert"></p>
+      </div>
+      <div class="largo">
+        <label for="r-obs">Observações <span class="opc">(opcional)</span></label>
+        <textarea id="r-obs" name="obs" maxlength="200" rows="3" aria-describedby="e-obs"></textarea>
+        <p class="erro" id="e-obs" role="alert"></p>
+      </div>
+    </div>
+    <button class="btn btn-primario" type="submit"><Icone nome="chat" /><span data-reserva-btn>Enviar pelo WhatsApp</span></button>
+    <div class="feedback" data-reserva-feedback role="status" hidden></div>
+  </form>
+  <p class="nota"><strong>A reserva só vale após a confirmação da casa.</strong> Este site não guarda o que você digita: os dados ficam só na mensagem que você enviar.</p>
+</section>
