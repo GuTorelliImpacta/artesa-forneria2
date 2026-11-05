@@ -1,0 +1,12 @@
+---
+interface Props { nome: 'chat' | 'fone' | 'rota' | 'pizza' | 'mapa' }
+const { nome } = Astro.props;
+const d: Record<string, string> = {
+  chat: 'M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z',
+  fone: 'M6.6 3h3l1.4 4-2 1.4a11 11 0 0 0 5.6 5.6l1.4-2 4 1.4v3a2 2 0 0 1-2 2A15 15 0 0 1 4.6 5a2 2 0 0 1 2-2z',
+  rota: 'M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21zm0-8.2a3.2 3.2 0 1 0 0-6.4 3.2 3.2 0 0 0 0 6.4z',
+  pizza: 'M12 3 3 20h18L12 3zm-1.5 9a1.2 1.2 0 1 1 0-.01zm3 3a1.2 1.2 0 1 1 0-.01z',
+  mapa: 'M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2zm0 0v14m6-12v14',
+};
+---
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true" focusable="false"><path d={d[nome]} /></svg>

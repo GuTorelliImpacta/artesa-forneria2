@@ -1,0 +1,4 @@
+{
+  "_ajuda": "Preencha 'categorias' com itens reais enviados pela casa. Cada item: nome, ingredientes (lista), preco (número em reais), tags (ex.: vegetariana), destaque (true para aparecer na Home). Vazio = a página mostra 'Cardápio completo no delivery'.",
+  "categorias": []
+}

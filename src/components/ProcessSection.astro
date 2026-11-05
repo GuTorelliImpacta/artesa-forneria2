@@ -1,0 +1,29 @@
+---
+import Foto from './Foto.astro';
+import borda from '../assets/pizza-borda.jpg';
+import molhos from '../assets/ingredientes-molhos.jpg';
+import forno from '../assets/pizza-forno.jpg';
+const etapas = [
+  { t: 'O tempo da fermentação', p: 'A massa descansa o tempo que precisa para ganhar textura, aroma e sabor.', img: borda, alt: 'Detalhe da borda alta e queimada de uma pizza, com presunto cru e rúcula.', w: [400, 520] },
+  { t: 'A seleção dos ingredientes', p: 'É dos ingredientes que vem o sabor de cada pizza. Por isso cada um importa.', img: molhos, alt: 'Mesa com potinhos de molhos e pastas, e um prato de limões em gomos.', w: [400, 640, 876] },
+  { t: 'O calor do forno', p: 'No forno a massa cresce, a borda ganha cor e a pizza chega pronta à mesa.', img: forno, alt: 'Borda de pizza com marcas de forno, presunto cru e doce escuro sobre a rúcula.', w: [400, 566] },
+];
+---
+<section class="secao secao-escura-2" id="processo" aria-labelledby="processo-t">
+  <div class="container">
+    <div class="estreito centrado rev">
+      <p class="sobrancelha">Processo artesanal</p>
+      <h2 class="h2" id="processo-t">Três etapas, nenhuma pressa.</h2>
+    </div>
+    <ol class="etapas">
+      {etapas.map((e, i) => (
+        <li class="etapa rev">
+          <div class="foto-et"><Foto src={e.img} alt={e.alt} sizes="(min-width: 900px) 360px, 90vw" widths={e.w} /></div>
+          <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{e.t}</h3>
+          <p>{e.p}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

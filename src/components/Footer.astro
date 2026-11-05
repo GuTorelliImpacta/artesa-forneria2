@@ -1,0 +1,46 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo-disco.png';
+import { config, enderecoLinha1, enderecoLinha2, waLink, telLink, deliveryUrl, rotaLink } from '../lib/site';
+import Horarios from './Horarios.astro';
+---
+<footer class="rodape">
+  <div class="container">
+    <div class="cols">
+      <div>
+        <a class="logo-r" href="/" aria-label={`${config.nome}, página inicial`}><Image src={logo} alt="" width={56} height={56} densities={[1, 2]} loading="lazy" />{config.nome}</a>
+        <p>{config.descricao}</p>
+        <address class="mt-m">{enderecoLinha1}<br />{enderecoLinha2}</address>
+      </div>
+      <div>
+        <h2>Contato</h2>
+        <ul>
+          <li><a href={waLink()} target="_blank" rel="noopener noreferrer">WhatsApp {config.whatsapp.exibicao}</a></li>
+          <li><a href={telLink} data-evt="click_call">{config.telefone.exibicao}</a></li>
+          <li><a href={`mailto:${config.email}`}>{config.email}</a></li>
+          <li><a href={config.instagram.url} target="_blank" rel="noopener noreferrer">Instagram @{config.instagram.usuario}</a></li>
+          <li><a href={rotaLink} target="_blank" rel="noopener noreferrer" data-evt="maps_click">Traçar rota</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Navegar</h2>
+        <ul>
+          <li><a href="/nossa-casa/">Nossa história</a></li>
+          <li><a href="/cardapio/" data-evt="click_menu">Cardápio</a></li>
+          {deliveryUrl && <li><a href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-evt="click_menu">Cardápio completo (pedidos)</a></li>}
+          <li><a href="/#experiencia">Experiência</a></li>
+          <li><a href="/#localizacao">Localização</a></li>
+          <li><a href="/politica-de-privacidade/">Política de privacidade</a></li>
+        </ul>
+      </div>
+      <div class="escuro">
+        <h2>Horários</h2>
+        <Horarios />
+      </div>
+    </div>
+    <div class="legal">
+      <p>Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>
+      <p>© 2026 {config.nome}{config.razaoSocial ? ` · ${config.razaoSocial}` : ''}{config.cnpj ? ` · CNPJ ${config.cnpj}` : ''}</p>
+    </div>
+  </div>
+</footer>

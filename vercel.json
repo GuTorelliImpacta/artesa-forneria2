@@ -1,0 +1,37 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/inicio", "destination": "/", "statusCode": 301 },
+    { "source": "/inicio/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/sobre", "destination": "/nossa-casa/", "statusCode": 301 },
+    { "source": "/sobre/:path*", "destination": "/nossa-casa/", "statusCode": 301 },
+    { "source": "/blog", "destination": "/nossa-casa/", "statusCode": 301 },
+    { "source": "/blog/:path*", "destination": "/nossa-casa/", "statusCode": 301 },
+    { "source": "/category/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/wp-content/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/feed", "destination": "/", "statusCode": 301 }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; font-src 'self'; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.google.com https://maps.google.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'" },
+        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" }
+      ]
+    },
+    {
+      "source": "/_astro/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}

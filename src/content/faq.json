@@ -1,0 +1,46 @@
+{
+  "perguntas": [
+    {
+      "id": "reserva",
+      "pergunta": "Vocês aceitam reserva?",
+      "resposta": "Você pede sua mesa pelo WhatsApp, informando data, horário e número de pessoas. A reserva só vale após a confirmação da casa.",
+      "publicado": true,
+      "home": true
+    },
+    {
+      "id": "horario",
+      "pergunta": "Qual o horário de funcionamento?",
+      "resposta": "Quinta, das 18h às 23h. Sexta e sábado, das 18h às 23h30. Domingo, das 12h às 17h. Segunda, terça e quarta a casa fica fechada.",
+      "publicado": true,
+      "home": true
+    },
+    {
+      "id": "fermentacao",
+      "pergunta": "Como funciona a fermentação longa?",
+      "resposta": "Em vez de acelerar a massa com muito fermento, deixa-se a massa descansar por bastante tempo. Nesse descanso os fermentos trabalham devagar: a massa fica mais leve, mais aromática e com a borda macia por dentro e dourada por fora.",
+      "publicado": true,
+      "home": true
+    },
+    {
+      "id": "estacionamento",
+      "pergunta": "Tem estacionamento?",
+      "resposta": "",
+      "publicado": false,
+      "confirmar": "Perguntar ao dono."
+    },
+    {
+      "id": "vegetariana",
+      "pergunta": "Tem opção vegetariana?",
+      "resposta": "",
+      "publicado": false,
+      "confirmar": "Depende do cardápio enviado pelo dono."
+    },
+    {
+      "id": "pets",
+      "pergunta": "Aceitam pets?",
+      "resposta": "",
+      "publicado": false,
+      "confirmar": "Perguntar ao dono."
+    }
+  ]
+}

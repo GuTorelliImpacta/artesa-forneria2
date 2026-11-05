@@ -1,0 +1,4 @@
+{
+  "_ajuda": "Adicione avaliações REAIS: { nome (público), nota (1-5), texto, fonte ('Google'), data ('2026-10')}. Vazio = a seção mostra só o convite para ler as avaliações no Google. Não existe aggregateRating no JSON-LD.",
+  "itens": []
+}

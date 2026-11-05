@@ -1,0 +1,10 @@
+---
+import Icone from './Icone.astro';
+import { waLink } from '../lib/site';
+interface Props { cardapio?: boolean; centro?: boolean; texto?: string }
+const { cardapio = false, texto = 'Reservar pelo WhatsApp' } = Astro.props;
+---
+<div class="acoes">
+  <a class="btn btn-primario" href={waLink()} target="_blank" rel="noopener noreferrer"><Icone nome="chat" />{texto}</a>
+  {cardapio && <a class="btn btn-secundario" href="/cardapio/" data-evt="click_menu">Ver cardápio</a>}
+</div>

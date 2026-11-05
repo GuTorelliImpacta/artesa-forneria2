@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import Foto from '../components/Foto.astro';
+import Fio from '../components/Fio.astro';
+import Icone from '../components/Icone.astro';
+import { config, cardapio, temCardapio, deliveryUrl, waLink } from '../lib/site';
+import borda from '../assets/pizza-borda.jpg';
+
+const cats = cardapio.categorias as any[];
+const temBebida = cats.some((c) => /vinho|bebida|cerveja|drink/i.test(c.nome) || c.itens.some((i: any) => (i.tags ?? []).includes('alcoólica')));
+const brl = (n: number) => `R$ ${n.toFixed(2).replace('.', ',')}`;
+---
+<Base
+  titulo="Cardápio | Artesã Forneria, pizzaria no Tremembé"
+  descricao="Veja o cardápio da Artesã Forneria, na Vila Irmãos Arnoni, Tremembé. Peça em casa ou reserve sua mesa pelo WhatsApp."
+  caminho="/cardapio/"
+  evento="view_cardapio"
+>
+  <section class="secao-escura cab-pagina">
+    <div class="container grade-2">
+      <div>
+        <p class="sobrancelha">Cardápio</p>
+        <h1>Escolha por onde começar.</h1>
+        <div class="mt-s"><Fio /></div>
+        <p class="lead mt-m">Sabores, ingredientes e preços em texto, para ler com calma no celular.</p>
+      </div>
+      <div class="moldura peq">
+        <Foto src={borda} alt="Detalhe da borda alta e queimada de uma pizza, com presunto cru e rúcula." sizes="(max-width: 900px) 70vw, 320px" widths={[320, 520]} prioridade />
+      </div>
+    </div>
+  </section>
+
+  <section class="secao secao-creme">
+    <div class="container">
+      {temCardapio ? (
+        <div class="estreito">
+          {cats.map((c) => (
+            <div class="cardapio-cat">
+              <h2>{c.nome}</h2>
+              {c.descricao && <p class="mt-s">{c.descricao}</p>}
+              {c.itens.map((i: any) => (
+                <div class="item">
+                  <h3>{i.nome}</h3>
+                  <span class="preco">{typeof i.preco === 'number' ? brl(i.preco) : ''}</span>
+                  {i.ingredientes?.length > 0 && <p>{i.ingredientes.join(', ')}</p>}
+                  {i.tags?.length > 0 && <p>{i.tags.map((t: string) => <span class="tag">{t}</span>)}</p>}
+                </div>
+              ))}
+            </div>
+          ))}
+          {temBebida && <p class="aviso-bebida mt-l">Venda e consumo de bebidas alcoólicas proibidos para menores de 18 anos. Beba com moderação.</p>}
+        </div>
+      ) : (
+        <div class="estreito vazio">
+          <h2 class="h2">{deliveryUrl ? 'Cardápio completo no delivery' : 'Cardápio a caminho'}</h2>
+          <p class="lead mt-s">
+            {deliveryUrl
+              ? 'Veja todos os sabores, ingredientes e preços na nossa página de pedidos.'
+              : 'Estamos montando o cardápio completo aqui. Enquanto isso, pergunte os sabores do dia pelo WhatsApp.'}
+          </p>
+          <div class="acoes centro mt-m">
+            {deliveryUrl && <a class="btn btn-primario" href={deliveryUrl} target="_blank" rel="noopener noreferrer" data-evt="click_menu">Ver cardápio e pedir</a>}
+            <a class={deliveryUrl ? 'btn btn-secundario' : 'btn btn-primario'} href={waLink('Olá! Gostaria de saber os sabores do cardápio da Artesã Forneria.')} target="_blank" rel="noopener noreferrer"><Icone nome="chat" />Perguntar no WhatsApp</a>
+          </div>
+        </div>
+      )}
+          </div>
+  </section>
+</Base>

@@ -1,0 +1,12 @@
+---
+import { mapaEmbed, mapaAbrirLink, rotaLink } from '../lib/site';
+---
+<div>
+  <div class="mapa">
+    <iframe src={mapaEmbed} title="Mapa da Artesã Forneria" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+  </div>
+  <div class="acoes mt-s">
+    <a class="btn btn-secundario btn-pequeno" href={rotaLink} target="_blank" rel="noopener noreferrer" data-evt="maps_click">Traçar rota</a>
+    <a class="btn btn-secundario btn-pequeno" href={mapaAbrirLink} target="_blank" rel="noopener noreferrer" data-evt="maps_click">Abrir no Google Maps</a>
+  </div>
+</div>

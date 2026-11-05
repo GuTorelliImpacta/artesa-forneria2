@@ -1,0 +1,23 @@
+---
+import Foto from './Foto.astro';
+import Fio from './Fio.astro';
+import maos from '../assets/pizza-branca-caixa.jpg';
+---
+<section class="secao secao-escura" id="historia" aria-labelledby="historia-t">
+  <div class="container historia">
+    <div class="texto rev">
+      <p class="sobrancelha">Nossa essência</p>
+      <h2 class="h2" id="historia-t">A arte está em cada detalhe.</h2>
+      <Fio />
+      <p class="lead">Na Artesã, acreditamos que uma boa pizza começa muito antes de chegar ao forno. Cada massa recebe o tempo necessário para desenvolver sua textura, aroma e sabor.</p>
+      <p>Trabalhamos com ingredientes selecionados e valorizamos cada etapa do preparo, porque acreditamos que a verdadeira experiência está nos detalhes.</p>
+      <p><a class="btn btn-secundario" href="/nossa-casa/">Conheça nossa história</a></p>
+    </div>
+    <figure class="rev">
+      <div class="moldura">
+        <Foto src={maos} alt="Mãos do pizzaiolo ajeitando uma pizza branca de queijos, dourada e com borda queimada, dentro de uma caixa octogonal." sizes="(min-width: 900px) 480px, 90vw" widths={[320, 500]} />
+      </div>
+      <figcaption class="legenda">Pizza branca de queijos saindo do forno.</figcaption>
+    </figure>
+  </div>
+</section>

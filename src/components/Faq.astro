@@ -1,0 +1,16 @@
+---
+import { faqPublicado } from '../lib/site';
+interface Props { apenasHome?: boolean }
+const { apenasHome = false } = Astro.props;
+const itens = faqPublicado.filter((p) => !apenasHome || (p as { home?: boolean }).home);
+---
+{itens.length > 0 && (
+  <div class="faq">
+    {itens.map((p) => (
+      <details>
+        <summary>{p.pergunta}</summary>
+        <div class="resp"><p>{p.resposta}</p></div>
+      </details>
+    ))}
+  </div>
+)}

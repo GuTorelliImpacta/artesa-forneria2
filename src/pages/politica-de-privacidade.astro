@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Fio from '../components/Fio.astro';
+import { config } from '../lib/site';
+---
+<Base
+  titulo="Política de privacidade | Artesã Forneria"
+  descricao="Como o site da Artesã Forneria trata dados: sem cookies, sem cadastro, sem armazenar o que você digita. Em linguagem simples."
+  caminho="/politica-de-privacidade/"
+>
+  <section class="secao-escura cab-pagina">
+    <div class="container">
+      <p class="sobrancelha">LGPD</p>
+      <h1>Política de privacidade</h1>
+      <div class="mt-s"><Fio /></div>
+      <p class="lead mt-m">Em linguagem simples: este site quase não guarda nada sobre você.</p>
+    </div>
+  </section>
+  <section class="secao secao-creme">
+    <div class="container">
+      <div class="prosa">
+        <h2>Quem somos</h2>
+        <p>
+          O responsável por este site é a {config.nome}, R. Padre Charton, 109, Vila Irmãos Arnoni, São Paulo - SP.
+          {config.razaoSocial && config.cnpj ? ` Razão social: ${config.razaoSocial}. CNPJ: ${config.cnpj}.` : ' A razão social e o CNPJ serão informados aqui assim que a casa os confirmar.'}
+          Contato para assuntos de privacidade: <a href={`mailto:${config.email}`}>{config.email}</a>.
+        </p>
+        <h2>O que o site coleta</h2>
+        <ul>
+          <li><strong>Cadastro e newsletter:</strong> não existem.</li>
+          <li><strong>Formulário de reserva:</strong> nome, dia, horário e número de pessoas são usados só para montar a mensagem de WhatsApp no seu aparelho. O site não envia nem guarda esses dados em servidor.</li>
+          <li><strong>Estatísticas de uso:</strong> o site está preparado para o Google Analytics 4, que conta visitas e cliques (cardápio, reserva, WhatsApp, mapa). Ele só é carregado se a casa o ativar e, por padrão, sem permissão para gravar cookies de análise ou de publicidade.</li>
+          <li><strong>Cookies:</strong> hoje o site não usa cookies de rastreamento ou de publicidade.</li>
+        </ul>
+        <h2>Serviços de terceiros</h2>
+        <ul>
+          <li><strong>Google Maps:</strong> o mapa das páginas Início e Contato é do Google e só carrega quando você chega perto dele. Ao carregar, o Google pode coletar dados conforme a política dele.</li>
+          <li><strong>WhatsApp (Meta):</strong> ao tocar em um botão de WhatsApp, você sai do site e a conversa passa a seguir as regras do WhatsApp.</li>
+          <li><strong>Google Analytics (Google):</strong> só se ativado, conforme acima.</li>
+          <li><strong>Yooga:</strong> o pedido de delivery, quando disponível, é feito em página do Yooga, com política própria.</li>
+          <li><strong>Instagram:</strong> o link leva ao perfil da casa, com política própria.</li>
+        </ul>
+        <h2>Seus direitos</h2>
+        <p>Pela LGPD (Lei 13.709/2018), você pode pedir acesso, correção ou exclusão de dados que a casa tenha recebido, por exemplo em conversas de WhatsApp. Escreva para <a href={`mailto:${config.email}`}>{config.email}</a>.</p>
+        <h2>Atualizações</h2>
+        <p>Esta página pode mudar quando o site mudar. Última atualização: novembro de 2026.</p>
+      </div>
+    </div>
+  </section>
+</Base>

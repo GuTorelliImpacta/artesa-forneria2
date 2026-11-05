@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import StorySection from '../components/StorySection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import MenuSection from '../components/MenuSection.astro';
+import ExperienceGallery from '../components/ExperienceGallery.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import LocationSection from '../components/LocationSection.astro';
+import { restaurante } from '../lib/jsonld';
+import { getImage } from 'astro:assets';
+import pizza from '../assets/pizza-presunto-rucula.jpg';
+
+// Preload da imagem principal (LCP), em AVIF responsivo.
+const set = await Promise.all([480, 768, 1206].map((w) => getImage({ src: pizza, width: w, format: 'avif', quality: 42 })));
+const srcset = set.map((i) => `${i.src} ${i.options.width}w`).join(', ');
+---
+<Base
+  titulo="Pizzaria artesanal no Tremembé | Artesã Forneria"
+  descricao="Pizza artesanal de fermentação cuidadosa na Vila Irmãos Arnoni, Tremembé. Veja o cardápio e reserve sua mesa pelo WhatsApp."
+  caminho="/"
+  jsonld={[restaurante()]}
+  hero
+>
+  <link slot="head" rel="preload" as="image" type="image/avif" imagesrcset={srcset} imagesizes="(min-width: 1024px) 72vw, 100vw" fetchpriority="high" />
+  <Hero />
+  <StorySection />
+  <ProcessSection />
+  <MenuSection />
+  <ExperienceGallery />
+  <TestimonialsSection />
+  <LocationSection />
+</Base>

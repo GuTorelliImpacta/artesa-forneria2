@@ -1,0 +1,17 @@
+---
+import Foto from './Foto.astro';
+import type { ImageMetadata } from 'astro';
+interface Props { nome?: string; descricao: string; preco?: number; img: ImageMetadata; alt: string }
+const { nome, descricao, preco, img, alt } = Astro.props;
+const brl = (n: number) => `R$ ${n.toFixed(2).replace('.', ',')}`;
+---
+<article class="prato">
+  <div class="foto-p"><Foto src={img} alt={alt} sizes="(min-width: 1000px) 340px, (min-width: 640px) 45vw, 90vw" widths={[320, 480, 640].filter((w) => w <= img.width)} /></div>
+  {(nome || typeof preco === 'number') && (
+    <div class="cab-p">
+      {nome && <h3>{nome}</h3>}
+      {typeof preco === 'number' && <span class="preco">{brl(preco)}</span>}
+    </div>
+  )}
+  <p class="suave">{descricao}</p>
+</article>

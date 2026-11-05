@@ -1,0 +1,31 @@
+---
+import Horarios from './Horarios.astro';
+import MapEmbed from './MapEmbed.astro';
+import ReservationForm from './ReservationForm.astro';
+import { config, enderecoLinha1, enderecoLinha2, waLink, telLink } from '../lib/site';
+---
+<section class="secao secao-creme" id="localizacao" aria-labelledby="loc-t">
+  <div class="container">
+    <div class="estreito centrado rev">
+      <p class="sobrancelha">Localização e reservas</p>
+      <h2 class="h2" id="loc-t">Sua próxima experiência começa aqui.</h2>
+    </div>
+    <div class="local mt-l">
+      <div>
+        <dl class="dados">
+          <div><dt>Endereço</dt><dd>{enderecoLinha1}<br />{enderecoLinha2}<br />{config.endereco.referencia[0].toUpperCase() + config.endereco.referencia.slice(1)}</dd></div>
+          <div><dt>WhatsApp</dt><dd><a href={waLink()} target="_blank" rel="noopener noreferrer">{config.whatsapp.exibicao}</a></dd></div>
+          <div><dt>Telefone</dt><dd><a href={telLink} data-evt="click_call">{config.telefone.exibicao}</a></dd></div>
+        </dl>
+        <div class="cartao mt-m" id="horarios">
+          <h3>Horários</h3>
+          <p class="pilula-h" data-status data-aberto="nao"><span class="ponto" aria-hidden="true"></span> <strong data-status-txt>Quinta a domingo</strong></p>
+          <Horarios />
+          <p class="aviso-bebida mt-s">Feriados e datas especiais: confirme pelo WhatsApp.</p>
+        </div>
+        <div class="mt-m"><MapEmbed /></div>
+      </div>
+      <ReservationForm />
+    </div>
+  </div>
+</section>

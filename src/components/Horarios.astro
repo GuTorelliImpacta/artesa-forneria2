@@ -1,0 +1,11 @@
+---
+import { linhasHorario } from '../lib/site';
+---
+<table class="horarios">
+  <caption class="sr-only">Horários de funcionamento</caption>
+  <tbody>
+    {linhasHorario().map((l) => (
+      <tr data-dias={l.dias}><th scope="row">{l.dias}</th><td>{l.horario}</td></tr>
+    ))}
+  </tbody>
+</table>

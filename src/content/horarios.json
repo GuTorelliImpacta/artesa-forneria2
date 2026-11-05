@@ -1,0 +1,14 @@
+{
+  "fuso": "America/Sao_Paulo",
+  "semana": [
+    { "dia": 0, "nome": "Domingo", "abre": "12:00", "fecha": "17:00" },
+    { "dia": 1, "nome": "Segunda-feira", "abre": null, "fecha": null },
+    { "dia": 2, "nome": "Terça-feira", "abre": null, "fecha": null },
+    { "dia": 3, "nome": "Quarta-feira", "abre": null, "fecha": null },
+    { "dia": 4, "nome": "Quinta-feira", "abre": "18:00", "fecha": "23:00" },
+    { "dia": 5, "nome": "Sexta-feira", "abre": "18:00", "fecha": "23:30" },
+    { "dia": 6, "nome": "Sábado", "abre": "18:00", "fecha": "23:30" }
+  ],
+  "excecoes": [],
+  "_exemplo_excecao": { "data": "2026-12-25", "fechado": true, "nota": "Natal" }
+}
